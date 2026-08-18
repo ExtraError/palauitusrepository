@@ -89,8 +89,45 @@ const BadStatistics = ({bad}) => {
   )
 }
 
+// Total
+
+const OverAll = ({good, neutral, bad}) => {
+  return (
+    <div>
+      <h3>
+        Total: {good + neutral + bad}
+      </h3>
+    </div>
+  )
+}
 
 
+// Average
+
+const Average = ({good, neutral, bad}) => {
+
+  return (
+    <div>
+      <p>
+        Average: {(good - bad) / (good + neutral + bad)}
+      </p>
+    </div>
+  )
+}
+
+
+// Percentage
+
+const Percentage = ({good, neutral, bad}) => {
+
+  return (
+    <div>
+      <p>
+        Percentage: {((good / (good + neutral + bad)) * 100)} %
+      </p>
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -118,6 +155,24 @@ const App = () => {
       <GoodStatistics good={good}/>
       <NeutralStatistics neutral={neutral}/>
       <BadStatistics bad={bad}/>
+
+      <OverAll 
+        good={good}
+        neutral={neutral}
+        bad={bad}
+      />
+
+      <Average 
+        good={good}
+        neutral={neutral}
+        bad={bad}
+      />
+
+      <Percentage
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        />
 
     </div>
   )
