@@ -25,115 +25,90 @@ const Header1 = ({subHeader}) => {
 }
 
 
-
 // This is button for good
 
-const Good = ({good, setGood}) => {
+const Good = (props) => {
 
   return (
-      <button onClick={() => setGood(good + 1)}>
+      <button onClick={() => props.setGood(props.good + 1)}>
         good
       </button>
   )
 }
 
-const GoodStatistics = ({good}) => {
-  return (
-    <div>
-      <p>
-        Good: {good}
-      </p>
-    </div>
-  )
-}
 
 // This is button for neutral
 
-const Neutral = ({neutral, setNeutral}) => {
+const Neutral = (props) => {
 
   return (
-      <button onClick={() => setNeutral(neutral + 1)}>
+      <button onClick={() => props.setNeutral(props.neutral + 1)}>
         neutral
       </button>
   )
 }
 
-const NeutralStatistics = ({neutral}) => {
-  return (
-    <div>
-      <p>
-        Neutral: {neutral}
-      </p>
-    </div>
-  )
-}
 
 // This is button for bad
 
-const Bad = ({bad, setBad}) => {
+const Bad = (props) => {
 
   return (
-      <button onClick={() => setBad(bad + 1)}>
+      <button onClick={() => props.setBad(props.bad + 1)}>
         bad
       </button>
   )
 }
 
-const BadStatistics = ({bad}) => {
+// Statistics
+
+const Statistics = (props) => {
+
+  if (props.good + props.neutral + props.bad === 0) {
+    return (
+      <div>
+        No Feedback
+      </div>
+    )
+  } else {
+
   return (
     <div>
       <p>
-        Bad: {bad}
+        Good: {props.good}
       </p>
-    </div>
-  )
-}
-
-// Total
-
-const OverAll = ({good, neutral, bad}) => {
-  return (
-    <div>
+      
+      <p>
+        Neutral: {props.neutral}
+      </p>
+      
+      <p>
+        Bad: {props.bad}
+      </p>
+      
       <h3>
-        Total: {good + neutral + bad}
+        Total: {props.good + props.neutral + props.bad}
       </h3>
-    </div>
-  )
-}
 
-
-// Average
-
-const Average = ({good, neutral, bad}) => {
-
-  return (
-    <div>
       <p>
-        Average: {(good - bad) / (good + neutral + bad)}
+        Average: {(props.good - props.bad) / (props.good + props.neutral + props.bad) || 0}
+      </p>
+
+      <p>
+        Positive: {((props.good / (props.good + props.neutral + props.bad)) * 100) || 0} %
       </p>
     </div>
   )
+  }
 }
 
 
-// Percentage
 
-const Percentage = ({good, neutral, bad}) => {
-
-  return (
-    <div>
-      <p>
-        Percentage: {((good / (good + neutral + bad)) * 100)} %
-      </p>
-    </div>
-  )
-}
 
 const App = () => {
 
   const courseHeader = 'Give Feedback'
   const subHeader = 'Statistics'
-
 
   // tallenna napit omaan tilaansa
   // Minimize the buttons to their own area.
@@ -152,27 +127,12 @@ const App = () => {
 
       <Header1 subHeader={subHeader}/>
 
-      <GoodStatistics good={good}/>
-      <NeutralStatistics neutral={neutral}/>
-      <BadStatistics bad={bad}/>
-
-      <OverAll 
-        good={good}
-        neutral={neutral}
+      <Statistics 
+        good={good} 
+        neutral={neutral} 
         bad={bad}
+
       />
-
-      <Average 
-        good={good}
-        neutral={neutral}
-        bad={bad}
-      />
-
-      <Percentage
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        />
 
     </div>
   )
