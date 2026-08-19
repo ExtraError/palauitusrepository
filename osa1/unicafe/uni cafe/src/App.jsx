@@ -24,15 +24,26 @@ const Header1 = ({subHeader}) => {
   )
 }
 
+// Generic button
+
+const Button = (props) => {
+  return (
+    <button 
+      onClick={props.onClick}>
+      {props.text}
+    </button>
+  )
+}
 
 // This is button for good
 
 const Good = (props) => {
 
   return (
-      <button onClick={() => props.setGood(props.good + 1)}>
-        good
-      </button>
+      <Button 
+      text='Good'
+        onClick={() => props.setGood(props.good + 1)}
+      />
   )
 }
 
@@ -42,9 +53,10 @@ const Good = (props) => {
 const Neutral = (props) => {
 
   return (
-      <button onClick={() => props.setNeutral(props.neutral + 1)}>
-        neutral
-      </button>
+     <Button 
+      text='Neutral'
+      onClick={() => props.setNeutral(props.neutral + 1)}
+    />
   )
 }
 
@@ -54,9 +66,22 @@ const Neutral = (props) => {
 const Bad = (props) => {
 
   return (
-      <button onClick={() => props.setBad(props.bad + 1)}>
-        bad
-      </button>
+      <Button 
+      text='Bad'
+        onClick={() => props.setBad(props.bad + 1)}
+      />
+  )
+}
+
+// Generic statistic line
+
+const StatisticalLine = (props) => {
+  return (
+    <div>
+      <p>
+        {props.text}: {props.value}
+      </p>
+    </div>
   )
 }
 
@@ -64,39 +89,40 @@ const Bad = (props) => {
 
 const Statistics = (props) => {
 
+  console.log(props)
   if (props.good + props.neutral + props.bad === 0) {
     return (
       <div>
-        No Feedback
+        No Feedback Given
       </div>
     )
   }
 
   return (
     <div>
-      <p>
-        Good: {props.good}
-      </p>
-      
-      <p>
-        Neutral: {props.neutral}
-      </p>
-      
-      <p>
-        Bad: {props.bad}
-      </p>
-      
-      <h3>
-        Total: {props.good + props.neutral + props.bad}
-      </h3>
+      <StatisticalLine
+        text='Good' value={props.good}
+      />
 
-      <p>
-        Average: {(props.good - props.bad) / (props.good + props.neutral + props.bad) || 0}
-      </p>
+      <StatisticalLine
+        text='Neutral' value={props.neutral}
+      />
+      
+     <StatisticalLine
+        text='Bad' value={props.bad}
+      />
 
-      <p>
-        Positive: {((props.good / (props.good + props.neutral + props.bad)) * 100) || 0} %
-      </p>
+      <StatisticalLine
+        text='Total' value={props.good + props.neutral + props.bad}
+      />
+
+      <StatisticalLine
+        text='Average' value={(props.good - props.bad) / (props.good + props.neutral + props.bad) || 0}
+      />
+
+      <StatisticalLine
+        text='Positive' value={`${((props.good / (props.good + props.neutral + props.bad)) * 100) || 0} %`}
+      />
     </div>
   )
   
@@ -127,8 +153,8 @@ const App = () => {
 
       <Header1 subHeader={subHeader}/>
 
-      <Statistics 
-        good={good} 
+      <Statistics
+        good={good}
         neutral={neutral} 
         bad={bad}
       />
