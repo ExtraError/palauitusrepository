@@ -70,7 +70,7 @@ const Statistics = (props) => {
         No Feedback
       </div>
     )
-  } else {
+  }
 
   return (
     <div>
@@ -99,7 +99,7 @@ const Statistics = (props) => {
       </p>
     </div>
   )
-  }
+  
 }
 
 
@@ -131,7 +131,6 @@ const App = () => {
         good={good} 
         neutral={neutral} 
         bad={bad}
-
       />
 
     </div>
