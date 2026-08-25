@@ -77,11 +77,18 @@ const Bad = (props) => {
 
 const StatisticalLine = (props) => {
   return (
-    <div>
-      <p>
-        {props.text}: {props.value}
-      </p>
-    </div>
+ 
+    <tr>
+      <td>
+        {props.text}
+      </td>
+      <td>
+        : 
+      </td>
+      <td>
+        {props.value}
+      </td>
+    </tr>
   )
 }
 
@@ -99,7 +106,12 @@ const Statistics = (props) => {
   }
 
   return (
+
+    
     <div>
+
+      <table>
+        <tbody>
       <StatisticalLine
         text='Good' value={props.good}
       />
@@ -123,6 +135,8 @@ const Statistics = (props) => {
       <StatisticalLine
         text='Positive' value={`${((props.good / (props.good + props.neutral + props.bad)) * 100) || 0} %`}
       />
+        </tbody>
+      </table>
     </div>
   )
   
