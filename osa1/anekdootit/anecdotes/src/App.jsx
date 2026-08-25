@@ -15,30 +15,42 @@ const Button = (props) => {
 const Anecdote = (props) => {
   return (
     <div>
-      {props.anecdotes[props.selected]}
-        <div>
-          <Button
-            text="Next Anecdote"
-            onClick={() => props.setSelected(
-              Math.floor(Math.random() * props.anecdotes.length)
-            )}
-          />
-        </div>
+      <div>
+        {props.anecdotes[props.selected]}
+      </div>
+
+      <div>
+        Votes: {props.vote[props.selected]}
+      </div>
+
+      <Button
+        text="Next Anecdote"
+        onClick={() => props.setSelected(
+          Math.floor(Math.random() * props.anecdotes.length)
+        )}
+      />
     </div>
   )
 }
 
-const Vote = (props) => {
 
-  console.log(props.vote)
+// Vote
+
+
+const Vote = (props) => {
   return (
     <div>
+      <Button
+        text="Vote"
+        onClick={() => {
+          const newVotes = [...props.vote]
 
-      <Button 
-      text="Vote"
-      onClick={() => props.setVote (props.vote + 1)}
+          newVotes[props.selected] =
+            newVotes[props.selected] + 1
+
+          props.setVote(newVotes)
+        }}
       />
-
     </div>
   )
 }
@@ -66,7 +78,7 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
 
-  const [vote, setVote] = useState(0)
+  const [vote, setVote] = useState([0, 0, 0, 0, 0, 0, 0, 0])
 
   return (
     <div>
@@ -74,10 +86,12 @@ const App = () => {
         anecdotes={anecdotes}
         selected={selected}
         setSelected={setSelected}
+        vote={vote}
       />
 
       <Vote 
       
+      selected={selected}
       vote={vote}
       setVote={setVote}
       />
