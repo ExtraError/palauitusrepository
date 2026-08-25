@@ -55,6 +55,22 @@ const Vote = (props) => {
   )
 }
 
+const MostVoted = (props) => {
+  return (
+    <div>
+      <h3>Anecdote with most votes</h3>
+
+      <div>
+        {props.anecdotes[props.mostVoted]}
+      </div>
+
+      <div>
+        Votes: {props.vote[props.mostVoted]}
+      </div>
+    </div>
+  )
+}
+
 // App
 
 const App = () => {
@@ -80,6 +96,8 @@ const App = () => {
 
   const [vote, setVote] = useState([0, 0, 0, 0, 0, 0, 0, 0])
 
+  const mostVoted = vote.indexOf(Math.max(...vote))
+
   return (
     <div>
       <Anecdote
@@ -95,7 +113,15 @@ const App = () => {
       vote={vote}
       setVote={setVote}
       />
+
+      <MostVoted
+        anecdotes={anecdotes}
+        vote={vote}
+        mostVoted={mostVoted}
+    />
+
     </div>
+
   )
 }
 
