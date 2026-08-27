@@ -15,6 +15,7 @@ const Button = (props) => {
 const Anecdote = (props) => {
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>
         {props.anecdotes[props.selected]}
       </div>
@@ -25,8 +26,8 @@ const Anecdote = (props) => {
 
       <Button
         text="Next Anecdote"
-        onClick={() => props.setSelected(
-          Math.floor(Math.random() * props.anecdotes.length)
+        onClick={() => props.setSelected(Math.floor(Math.random() * props.anecdotes.length)
+          
         )}
       />
     </div>
@@ -43,11 +44,8 @@ const Vote = (props) => {
       <Button
         text="Vote"
         onClick={() => {
-          const newVotes = [...props.vote]
-
-          newVotes[props.selected] =
-            newVotes[props.selected] + 1
-
+          const newVotes = [...props.vote] 
+          newVotes[props.selected] = newVotes[props.selected] + 1 
           props.setVote(newVotes)
         }}
       />
@@ -55,10 +53,14 @@ const Vote = (props) => {
   )
 }
 
+
+// Most votes
+
+
 const MostVoted = (props) => {
   return (
     <div>
-      <h3>Anecdote with most votes</h3>
+      <h1>Anecdote with most votes</h1>
 
       <div>
         {props.anecdotes[props.mostVoted]}
@@ -115,9 +117,10 @@ const App = () => {
       />
 
       <MostVoted
-        anecdotes={anecdotes}
+       
         vote={vote}
         mostVoted={mostVoted}
+        anecdotes={anecdotes}
     />
 
     </div>
