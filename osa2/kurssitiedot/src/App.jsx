@@ -4,9 +4,7 @@ const Course = (props) => {
     <div>
       <Header course={props.course}/>
       <SubHeader course={props.course}/>
-      <ContentOne course={props.course}/>
-      
-      <ContentTwo course={props.course}/>
+      <Content course={props.course}/>
     </div>
   )
 }
@@ -29,8 +27,6 @@ const SubHeader = (props) => {
   )
 }
 
-// Applying what I learn in part1
-// Creating universal single component to be distributed inside the component content
 
 const Part = (props) => {
   return (
@@ -42,60 +38,39 @@ const Part = (props) => {
   )
 }
 
-// Applying Map method rather than index
-// on subHeader its an index while below is a map()
 
-// First Object inside an Array
-
-const ContentOne = (props) => {
+const Content = (props) => {
+  
   return (
     <div>
-      <Part 
-        name={props.course[0].parts.map(part => part.name)[0]}
-        exercises={props.course[0].parts.map(list => list.exercises)[0]}
-      />
+      {props.course[0].parts.map(list => 
+        <Part
+            name={list.name}
+            exercises={list.exercises}
+            key={list.id}
+        />
+      )}
 
-      <Part 
-        name={props.course[0].parts.map(part => part.name)[1]}
-        exercises={props.course[0].parts.map(list => list.exercises)[1]}
-      />
+      <h3>
+        Total of {props.course[0].parts.reduce((sum, part) => sum + part.exercises, 0)} Excercises
+      </h3>
 
-      <Part 
-        name={props.course[0].parts.map(part => part.name)[2]}
-        exercises={props.course[0].parts.map(list => list.exercises)[2]}
-      />
+      {props.course[1].parts.map(list => 
+        <Part
+            name={list.name}
+            exercises={list.exercises}
+            key={list.id}
+        />
+      )}
 
-      <Part 
-        name={props.course[0].parts.map(part => part.name)[3]}
-        exercises={props.course[0].parts.map(list => list.exercises)[3]}
-      />
-
-      <h3>Total of {props.course[0].parts.reduce((sum, list) => sum + list.exercises, 0)} excercises</h3>
-      
+      <h3>
+        Total of {props.course[1].parts.reduce((sum, part) => sum + part.exercises, 0)} Excercises
+      </h3>
     </div>
+
+    
   )
 }
-
-// Second Object inside an Array
-
-const ContentTwo = (props) => {
-  return (
-    <div>
-      <Part 
-        name={props.course[1].parts.map(part => part.name)[0]}
-        exercises={props.course[1].parts.map(list => list.exercises)[0]}
-      />
-
-      <Part 
-        name={props.course[1].parts.map(part => part.name)[1]}
-        exercises={props.course[1].parts.map(list => list.exercises)[1]}
-      />
-
-      <h3>Total of {props.course[1].parts.reduce((sum, list) => sum + list.exercises, 0)} excercises</h3>
-    </div>
-  )
-}
-
 
 
 const App = () => {
